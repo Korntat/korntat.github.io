@@ -341,6 +341,7 @@ p { margin: 0 0 1em; }
 }
 .photo-label { font-family: var(--font-head); color: var(--ink); font-weight: 600; margin: 0 0 10px; }
 .llm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 26px; }
+.llm-three { grid-template-columns: repeat(3, 1fr); }
 .gov-photos { grid-template-columns: repeat(3, 1fr); }
 .teach-photos { grid-template-columns: 1fr; max-width: 640px; }
 .teach-photos img { aspect-ratio: 16 / 10; }
