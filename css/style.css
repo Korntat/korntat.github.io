@@ -339,7 +339,10 @@ p { margin: 0 0 1em; }
   .title-item::before { width: 2rem; height: 2rem; font-size: .88rem; }
   .title-item-name { font-size: 1.02rem; }
 }
-.llm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: -12px 0 30px; }
+.photo-label { font-family: var(--font-head); color: var(--ink); font-weight: 600; margin: 0 0 10px; }
+.llm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 26px; }
+.gov-photos { grid-template-columns: repeat(3, 1fr); }
+.gov-photos img { aspect-ratio: 3 / 4; object-position: center 20%; }
 .llm-photos figure { margin: 0; }
 .llm-photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: var(--radius); border: 1px solid var(--line); }
-@media (max-width: 600px) { .llm-photos { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .llm-photos { grid-template-columns: 1fr; } .gov-photos { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
