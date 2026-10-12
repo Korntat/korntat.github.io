@@ -342,6 +342,8 @@ p { margin: 0 0 1em; }
 .photo-label { font-family: var(--font-head); color: var(--ink); font-weight: 600; margin: 0 0 10px; }
 .llm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 26px; }
 .gov-photos { grid-template-columns: repeat(3, 1fr); }
+.teach-photos { grid-template-columns: 1fr; max-width: 640px; }
+.teach-photos img { aspect-ratio: 16 / 10; }
 .gov-photos img { aspect-ratio: 3 / 4; object-position: center 20%; }
 .llm-photos figure { margin: 0; }
 .llm-photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: var(--radius); border: 1px solid var(--line); }
