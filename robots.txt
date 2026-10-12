@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://korntat.github.io/sitemap.xml
