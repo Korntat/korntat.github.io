@@ -349,3 +349,6 @@ p { margin: 0 0 1em; }
 .llm-photos figure { margin: 0; }
 .llm-photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 30%; border-radius: var(--radius); border: 1px solid var(--line); }
 @media (max-width: 600px) { .llm-photos { grid-template-columns: 1fr; } .gov-photos { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
+
+.brand-name{white-space:nowrap}
+@media (max-width:400px){.brand-name{font-size:1rem}}
