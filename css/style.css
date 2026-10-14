@@ -352,3 +352,8 @@ p { margin: 0 0 1em; }
 
 .brand-name{white-space:nowrap}
 @media (max-width:400px){.brand-name{font-size:1rem}}
+.gov-photos { margin-bottom: 14px; }
+.photo-caption { color: var(--muted, #666); font-size: .92rem; margin: 0 0 8px; }
+.thanyaburi-photos { grid-template-columns: 1fr 1fr; gap: 12px; }
+.thanyaburi-photos img { aspect-ratio: 4 / 3; object-position: center 35%; }
+@media (max-width: 600px) { .thanyaburi-photos { grid-template-columns: 1fr 1fr; gap: 8px; } }
