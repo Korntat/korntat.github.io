@@ -358,3 +358,4 @@ p { margin: 0 0 1em; }
 .thanyaburi-photos img { aspect-ratio: 4 / 3; object-position: center 35%; }
 @media (max-width: 600px) { .thanyaburi-photos { grid-template-columns: 1fr 1fr; gap: 8px; } }
 .llm-photos figcaption.photo-caption { margin: 6px 0 0; font-size: .85rem; line-height: 1.45; }
+.photo-caption .nw { white-space: nowrap; }
