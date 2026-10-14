@@ -361,4 +361,4 @@ p { margin: 0 0 1em; }
 .photo-caption .nw { white-space: nowrap; }
 .thanyaburi-photos figure.wide { grid-column: 1 / -1; } .thanyaburi-photos figure.wide img { aspect-ratio: 16 / 9; object-position: center 40%; }
 .gov-photos { grid-template-columns: repeat(4, 1fr); } @media (max-width: 600px) { .gov-photos { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
-.llm-trio { grid-template-columns: repeat(3, 1fr); } .llm-trio img { aspect-ratio: 1 / 1; } @media (max-width: 600px) { .llm-trio { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
+.llm-trio { grid-template-columns: repeat(3, 1fr); } .llm-trio img { aspect-ratio: 4 / 3; } .llm-trio img[src*="aberdeen-graduation"] { object-position: left center; } @media (max-width: 600px) { .llm-trio { grid-template-columns: repeat(3, 1fr); gap: 8px; } }
