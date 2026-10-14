@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 var L=["ก","ข","ค","ง"],D=null,S={view:"home"},app=document.getElementById("app");
-var KEY="quiz-state-v1";
+var KEY="quiz-state-v1",VER=9;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.view)S=s}catch(e){}
   S.resume=(S.view==="q"||(S.view==="sum"&&!S.sent))?S.view:null;S.view="home";}
@@ -81,7 +81,7 @@ function render(){
   }
 }
 load();
-fetch("data/questions.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){D=d;if(S.course&&!course(S.course))S.view="home";render()}).catch(function(){app.innerHTML='<p>โหลดแบบทดสอบไม่สำเร็จ กรุณาลองใหม่</p>'});
+fetch("data/questions.json?v=9",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){D=d;if(S.course&&!course(S.course))S.view="home";render()}).catch(function(){app.innerHTML='<p>โหลดแบบทดสอบไม่สำเร็จ กรุณาลองใหม่</p>'});
 var tg=document.getElementById("tohome");if(tg)tg.onclick=function(e){e.preventDefault();if(!D)return;if(S.view==="q"||(S.view==="sum"&&!S.sent))S.resume=S.view;go("home")};
-if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js?v=9",{updateViaCache:"none"}).then(function(g){g.update()}).catch(function(){})}
 })();

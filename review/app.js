@@ -1,6 +1,6 @@
 let D;const $=s=>document.querySelector(s),A=$('#app');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-fetch('data/content.json').then(r=>r.json()).then(j=>{D=j;route()});
+fetch('data/content.json?v=4',{cache:'no-cache'}).then(r=>r.json()).then(j=>{D=j;route()});
 addEventListener('hashchange',route);
 $('#q').addEventListener('input',e=>{const v=e.target.value.trim();if(v)search(v);else route()});
 function route(){if(!D)return;$('#q').value='';const p=location.hash.replace(/^#\/?/,'').split('/');scrollTo(0,0);
@@ -24,4 +24,4 @@ function search(v){const lv=v.toLowerCase(),R=[];const hl=t=>esc(t).split(esc(v)
   chk('ชื่อเรื่อง',s.title);s.principles.forEach(x=>chk('หลัก',x));s.sections.forEach(x=>chk('มาตรา',x));s.deka.forEach(d=>chk('ฎีกา',d[0]+' '+d[1]));s.cards.forEach(q=>chk('บัตรคำ',q[0]+' — '+q[1]));
   if(h.length)R.push(`<a class="card" href="#/${c.id}/${s.n}"><b>${esc(c.name)} ครั้งที่ ${s.n}: ${esc(s.title)}</b>${h.slice(0,4).join('')}${h.length>4?`<div class="muted">และอีก ${h.length-4} รายการ</div>`:''}</a>`)}
  A.innerHTML=`<h1>ผลการค้นหา “${esc(v)}”</h1><p class="muted">พบ ${R.length} ครั้งที่เรียน</p>`+R.join('')}
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(g=>g.update()).catch(()=>{});
