@@ -54,14 +54,14 @@ function render(){
     lines.splice(3,0,"ตอบแล้ว "+answered+"/"+it.length+" ข้อ");
     var txt=lines.join("\n");
     h('<h1>สรุปคำตอบ</h1><p class="lead">'+esc(c.name)+' · '+(S.session==="all"?"ทั้งวิชา":"ครั้งที่ "+S.session)+'<br>ชื่อ: '+esc(S.name||"-")+(S.sid?" · รหัส "+esc(S.sid):"")+' · ตอบแล้ว '+answered+'/'+it.length+' ข้อ</p>'+
-    '<div class="note">กดส่งคำตอบ หรือกด "คัดลอกคำตอบ" แล้วส่งข้อความนี้ให้อาจารย์ (เช่น ทาง LINE หรืออีเมล) อาจารย์จะเป็นผู้ตรวจและแจ้งผล</div>'+
-    (window.SUBMIT_URL?'<div class="row" style="margin:0 0 10px"><button class="btn" id="sb"'+(S.sent?' disabled':'')+'>'+(S.sent?'ส่งคำตอบแล้ว ✓':'ส่งคำตอบให้อาจารย์')+'</button><span class="meta" id="sm"></span></div>':'')+
-    '<div class="row" style="margin:0 0 14px"><button class="btn gold" id="cp">คัดลอกคำตอบ</button><button class="btn ghost" id="ed">แก้คำตอบ</button></div>'+
+    '<div class="note">'+(window.SUBMIT_URL?'ตรวจคำตอบให้เรียบร้อย แล้วกด "ส่งคำตอบให้อาจารย์" คำตอบจะส่งถึงอาจารย์โดยอัตโนมัติ':'ตรวจคำตอบให้เรียบร้อย แล้วกด "คัดลอกคำตอบ" เพื่อส่งให้อาจารย์')+'</div>'+
+    (window.SUBMIT_URL?'<div class="row" style="margin:0 0 10px"><button class="btn" id="sb"'+(S.sent?' disabled':'')+'>'+(S.sent?'ส่งคำตอบแล้ว ✓':'ส่งคำตอบให้อาจารย์')+'</button><span class="meta" id="sm">'+(S.sent&&S.sentAt?'ส่งเมื่อ '+esc(S.sentAt):'')+'</span></div>':'')+
+    '<div class="row" style="margin:0 0 14px">'+(window.SUBMIT_URL?'':'<button class="btn gold" id="cp">คัดลอกคำตอบ</button>')+'<button class="btn ghost" id="ed">แก้คำตอบ</button></div>'+
     '<table><thead><tr><th>ครั้งที่</th><th>ข้อ</th><th>คำตอบ</th></tr></thead><tbody>'+
     it.map(function(x){return '<tr><td>'+x.s+'</td><td>'+x.n+'</td><td class="ans">'+(S.ans[x.s+"-"+x.n]||"-")+'</td></tr>'}).join("")+'</tbody></table>'+
     '<textarea id="tx" readonly style="position:absolute;left:-9999px">'+esc(txt)+'</textarea>'+
     '<div class="row"><button class="btn ghost" id="nw">ทำชุดอื่น</button></div>');
-    document.getElementById("cp").onclick=function(){var b=this;function ok(){b.textContent="คัดลอกแล้ว ✓"}
+    var cpb=document.getElementById("cp");if(cpb)cpb.onclick=function(){var b=this;function ok(){b.textContent="คัดลอกแล้ว ✓"}
       if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fb)}else fb();
       function fb(){var t=document.getElementById("tx");t.select();try{document.execCommand("copy");ok()}catch(e){prompt("คัดลอกข้อความนี้",txt)}}};
     var sb=document.getElementById("sb");if(sb)sb.onclick=function(){
@@ -69,8 +69,8 @@ function render(){
       var body={name:S.name,studentId:S.sid,course:c.name,courseId:c.id,session:S.session==="all"?"ทั้งวิชา":String(S.session),answers:comp,submittedAt:new Date().toISOString()};
       sb.disabled=true;sb.textContent="กำลังส่ง…";
       fetch(window.SUBMIT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)})
-      .then(function(){S.sent=true;save();sb.textContent="ส่งคำตอบแล้ว ✓"})
-      .catch(function(){sb.disabled=false;sb.textContent="ส่งคำตอบให้อาจารย์";document.getElementById("sm").textContent="ส่งไม่สำเร็จ ลองใหม่หรือกดคัดลอกแทน"})};
+      .then(function(){var d=new Date();S.sent=true;S.sentAt=d.toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"});save();sb.textContent="ส่งคำตอบแล้ว ✓";document.getElementById("sm").textContent="ส่งเมื่อ "+S.sentAt})
+      .catch(function(){sb.disabled=false;sb.textContent="ส่งคำตอบให้อาจารย์";document.getElementById("sm").textContent="ส่งไม่สำเร็จ กรุณาตรวจอินเทอร์เน็ต แล้วกดส่งอีกครั้ง"})};
     document.getElementById("ed").onclick=function(){S.i=0;go("q")};
     document.getElementById("nw").onclick=function(){S.ans={};go("home")};
   }
