@@ -3,7 +3,9 @@
 var L=["ก","ข","ค","ง"],D=null,S={view:"home"},app=document.getElementById("app");
 var KEY="quiz-state-v1";
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.view)S=s}catch(e){}}
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.view)S=s}catch(e){}
+  S.resume=(S.view==="q"||(S.view==="sum"&&!S.sent))?S.view:null;S.view="home";}
+function sessLabel(){return S.session==="all"?"ทั้งวิชา":"ครั้งที่ "+S.session}
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function course(id){return D.courses.filter(function(c){return c.id===id})[0]}
 function h(html){app.innerHTML=html;window.scrollTo(0,0)}
@@ -16,9 +18,12 @@ function items(){ // list of {s,n,q,c}
 function render(){
   if(S.view==="home"){
     h('<h1>แบบทดสอบปรนัย</h1><p class="lead">เลือกวิชา แล้วเลือกครั้งที่เรียน ข้อสอบแบบกากบาท 4 ตัวเลือก (ก ข ค ง) ทำเสร็จแล้วส่งคำตอบให้อาจารย์ตรวจ</p>'+
+    (S.resume&&course(S.course)?'<div class="note resume"><b>มีชุดที่ทำค้างไว้</b><br><button class="btn gold" id="rs">ทำชุดที่ค้างไว้ต่อ ('+esc(course(S.course).name)+' '+sessLabel()+')</button> <button class="btn ghost" id="rd">ทิ้งชุดนี้</button></div>':'')+
     D.courses.map(function(c){var n=0,m=0;c.sessions.forEach(function(s){n+=s.questions.length;if(s.questions.length)m++});return '<button class="card" data-c="'+c.id+'"><b>'+esc(c.name)+'</b><small>'+m+' ครั้ง · '+n+' ข้อ</small></button>'}).join("")+
     '<div class="note">ระบบไม่เฉลยและไม่ให้คะแนนอัตโนมัติ อาจารย์เป็นผู้ตรวจคำตอบ</div>');
-    app.querySelectorAll("[data-c]").forEach(function(b){b.onclick=function(){S.course=b.dataset.c;go("sessions")}});
+    app.querySelectorAll("[data-c]").forEach(function(b){b.onclick=function(){S.resume=null;S.course=b.dataset.c;go("sessions")}});
+    var rs=document.getElementById("rs");if(rs)rs.onclick=function(){var v=S.resume;S.resume=null;go(v)};
+    var rd=document.getElementById("rd");if(rd)rd.onclick=function(){if(!confirm("ต้องการทิ้งคำตอบชุดที่ทำค้างไว้หรือไม่"))return;S.resume=null;S.ans={};S.i=0;go("home")};
   } else if(S.view==="sessions"){
     var c=course(S.course),tot=0;c.sessions.forEach(function(s){tot+=s.questions.length});
     h('<button class="back" id="bk">‹ เลือกวิชาอื่น</button><h1>'+esc(c.name)+'</h1><p class="lead">เลือกครั้งที่ต้องการทำแบบทดสอบ</p><div class="grid">'+
@@ -77,5 +82,6 @@ function render(){
 }
 load();
 fetch("data/questions.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){D=d;if(S.course&&!course(S.course))S.view="home";render()}).catch(function(){app.innerHTML='<p>โหลดแบบทดสอบไม่สำเร็จ กรุณาลองใหม่</p>'});
+var tg=document.getElementById("tohome");if(tg)tg.onclick=function(e){e.preventDefault();if(!D)return;if(S.view==="q"||(S.view==="sum"&&!S.sent))S.resume=S.view;go("home")};
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
 })();
