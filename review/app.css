@@ -19,3 +19,5 @@ p,li,.ans,.dk{text-align:justify;text-justify:inter-character}
 details summary{cursor:pointer;color:var(--ink2);font-weight:600}
 .nav2{display:flex;justify-content:space-between;margin:24px 0}.nav2 a{color:var(--ink2)}
 mark{background:#f6dfa6}.ft{text-align:center;color:var(--muted);font-size:.8rem;padding:24px 16px}
+
+h1,h2,h3,button,.card,.course,[class*=course],[class*=title]{word-break:keep-all;overflow-wrap:break-word}

@@ -40,3 +40,5 @@ td.ans{font-weight:700;text-align:center}
 .foot{text-align:center;color:var(--muted);font-size:14px;padding:16px}
 .loading{color:var(--muted)}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr;gap:0 12px}}
+
+h1,h2,h3,button,.card,.course,[class*=course],[class*=title]{word-break:keep-all;overflow-wrap:break-word}
