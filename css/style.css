@@ -19,7 +19,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; max-width: 100%; }
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -90,7 +90,7 @@ p { margin: 0 0 1em; }
 .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 .hero-inner { display: grid; grid-template-columns: 1.3fr .9fr; gap: 48px; align-items: center; padding: 96px 24px 104px; }
 .hero h1 { color: var(--white); margin-bottom: .35em; }
-.hero h1 .accent { color: var(--gold); }
+.hero h1 .accent { color: var(--white); }
 .eyebrow { display: inline-block; font-size: .9rem; font-weight: 600; letter-spacing: .06em; color: var(--gold); margin-bottom: 14px; }
 .hero-lead { font-size: 1.2rem; color: #cfd7e6; max-width: 38em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
@@ -404,14 +404,13 @@ html:not([lang="th"]) .llm-photos figcaption.photo-caption { font-size: .78rem; 
 .slide { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
 .slide.is-active { opacity: 1; visibility: visible; transition: opacity .8s ease; }
 .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.slide-cap { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 46px 70px 22px 24px; color: #fff; font-size: 1.15rem; font-weight: 600; line-height: 1.4; background: linear-gradient(to top, rgba(8,16,32,.78), rgba(8,16,32,0)); text-shadow: 0 1px 6px rgba(0,0,0,.4); }
 .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.55); background: rgba(15,31,58,.55); color: #fff; cursor: pointer; display: grid; place-items: center; padding: 0; }
 .slider-btn:hover { background: rgba(15,31,58,.85); }
 .slider-btn:focus-visible, .slider-dot:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .slider-btn svg { width: 22px; height: 22px; }
 .slider-prev { left: 12px; } .slider-next { right: 12px; }
 .slider-dots { position: absolute; right: 18px; bottom: 20px; display: flex; gap: 8px; }
-.slider-dot { width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 1.5px solid #fff; background: transparent; cursor: pointer; }
+.slider-dot { box-shadow: 0 0 0 1px rgba(15,31,58,.35), 0 1px 4px rgba(0,0,0,.45); width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 1.5px solid #fff; background: transparent; cursor: pointer; }
 .slider-dot[aria-current="true"] { background: var(--gold); border-color: var(--gold); }
 .slide:nth-child(1) img { object-position: center 55%; }
 .slide:nth-child(2) img { object-position: center 66%; }
@@ -419,12 +418,11 @@ html:not([lang="th"]) .llm-photos figcaption.photo-caption { font-size: .78rem; 
 @media (max-width: 700px) {
   .slider { margin: 18px -6px; border-radius: 14px; }
   .slider-viewport { aspect-ratio: 4 / 3; }
-  .slide-cap { font-size: 1rem; padding: 40px 78px 16px 16px; }
   .slider-btn { width: 40px; height: 40px; top: 42%; }
   .slider-prev { left: 8px; } .slider-next { right: 8px; }
   .slider-dots { right: 14px; bottom: 18px; }
 }
-@media (prefers-reduced-motion: reduce) { .slide, .slide.is-active { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .slide, .slide.is-active { transition: none; } } /* no animation: instant swap, autoplay still runs */
 
 /* ---- slideshow on the home page (directly under the navbar) ---- */
 .slider-home { background: var(--ink); padding: 16px 0 6px; }
@@ -434,5 +432,11 @@ html:not([lang="th"]) .llm-photos figcaption.photo-caption { font-size: .78rem; 
   .slider-home { padding: 12px 0 2px; }
   .slider-home .slider { margin: 0; border-radius: 14px; }
   .slider-home .slider-viewport { height: 240px; }
-  .slider-home .slide-cap { font-size: .95rem; padding: 34px 76px 12px 14px; }
 }
+
+/* ---- no sideways overflow on narrow iPhones: grid columns may shrink, captions fit, slider swipes only horizontally ---- */
+.llm-photos > * { min-width: 0; }
+.slider-home, .slider-home .container { max-width: 100%; overflow: hidden; }
+.slider-viewport { touch-action: pan-y pinch-zoom; }
+@media (max-width: 400px) { .llm-photos figcaption.photo-caption { font-size: .72rem; line-height: 1.4; } .gov-photos { gap: 12px; } }
+@media (max-width: 340px) { .llm-photos .photo-caption .nw { white-space: normal; } }
