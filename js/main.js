@@ -1,12 +1,13 @@
 // Mobile menu + article category filter
 (function () {
   var toggle = document.querySelector('.nav-toggle');
+  function label(open) { var th = open ? 'ปิดเมนู' : 'เปิดเมนู'; return window.I18N ? window.I18N.t(th) : th; }
   var nav = document.getElementById('site-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
       var open = nav.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+      toggle.setAttribute('aria-label', label(open));
     });
     nav.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') {
@@ -41,5 +42,10 @@
   });
 
   var y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear() + 543;
+  function setYear() { if (y) y.textContent = new Date().getFullYear() + (document.documentElement.lang === 'en' || document.documentElement.lang === 'ja' ? 0 : 543); }
+  setYear();
+  document.addEventListener('i18n:change', function () {
+    setYear();
+    if (toggle && nav) toggle.setAttribute('aria-label', label(nav.classList.contains('is-open')));
+  });
 })();
