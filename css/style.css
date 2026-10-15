@@ -425,3 +425,14 @@ html:not([lang="th"]) .llm-photos figcaption.photo-caption { font-size: .78rem; 
   .slider-dots { right: 14px; bottom: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .slide, .slide.is-active { transition: none; } }
+
+/* ---- slideshow on the home page (directly under the navbar) ---- */
+.slider-home { background: var(--ink); padding: 16px 0 6px; }
+.slider-home .slider { margin: 0; box-shadow: none; border: 1px solid rgba(193,154,75,.35); }
+.slider-home .slider-viewport { aspect-ratio: auto; height: clamp(300px, 36vw, 470px); max-height: none; }
+@media (max-width: 700px) {
+  .slider-home { padding: 12px 0 2px; }
+  .slider-home .slider { margin: 0; border-radius: 14px; }
+  .slider-home .slider-viewport { height: 240px; }
+  .slider-home .slide-cap { font-size: .95rem; padding: 34px 76px 12px 14px; }
+}

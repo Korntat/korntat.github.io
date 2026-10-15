@@ -98,7 +98,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -123,6 +123,20 @@
     </div>
   </header>
   <main id="main">
+    <section class="slider-home" aria-label="ภาพสไลด์">
+      <div class="container">
+        <div class="slider" data-slider role="region" aria-roledescription="carousel" aria-label="ภาพสไลด์">
+          <div class="slider-viewport" aria-live="off">
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="1 / 3"><img src="assets/slider-1.jpg" alt="วิทยาลัยมาริชัลปกคลุมด้วยหิมะ พร้อมรูปปั้นนักรบขี่ม้าด้านหน้า" width="960" height="720"><figcaption class="slide-cap">วิทยาลัยมาริชัล มหาวิทยาลัยอเบอร์ดีน</figcaption></figure>
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="2 / 3"><img src="assets/slider-2.jpg" alt="ปราสาทสีขาวในสกอตแลนด์ มีสนามหญ้าและเนินเขาด้านหลัง" width="769" height="658" loading="lazy"><figcaption class="slide-cap">ปราสาทในสกอตแลนด์</figcaption></figure>
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="3 / 3"><img src="assets/slider-3.jpg" alt="ต้นสนปกคลุมด้วยหิมะริมแม่น้ำในไฮแลนด์ของสกอตแลนด์" width="1600" height="1200" loading="lazy"><figcaption class="slide-cap">ไฮแลนด์ของสกอตแลนด์ในฤดูหนาว</figcaption></figure>
+          </div>
+          <button type="button" class="slider-btn slider-prev" aria-label="ภาพก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+          <button type="button" class="slider-btn slider-next" aria-label="ภาพถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          <div class="slider-dots"><button type="button" class="slider-dot" aria-label="ภาพที่ 1" aria-current="true"></button><button type="button" class="slider-dot" aria-label="ภาพที่ 2" aria-current="false"></button><button type="button" class="slider-dot" aria-label="ภาพที่ 3" aria-current="false"></button></div>
+        </div>
+      </div>
+    </section>
     <section class="hero">
       <div class="container hero-inner">
         <div>
@@ -297,7 +311,8 @@
       <p class="photo-credit">ภาพพื้นหลัง: Marischal College, Aberdeen, Scotland โดย <a href="https://commons.wikimedia.org/wiki/User:UltrasonicMadness" rel="noopener">UltrasonicMadness</a> จาก <a href="https://commons.wikimedia.org/wiki/File:Marischal_College_-_April_2023.jpg" rel="noopener">Wikimedia Commons</a> สัญญาอนุญาต <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">CC BY-SA 4.0</a> (ปรับขนาดและใส่โทนสีทับ)</p>
     </div>
   </footer>
-  <script src="js/i18n.js?v=2"></script>
+  <script src="js/i18n.js?v=3"></script>
   <script src="js/main.js?v=2"></script>
+  <script src="js/slider.js?v=2"></script>
 </body>
 </html>

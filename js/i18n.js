@@ -80,7 +80,7 @@
     var txt = el.textContent;
     if (!TH.test(txt)) return;
     var r = tr(txt, cur);
-    if (r && (!el.children.length || r.s.indexOf('<') > -1 || r.f.indexOf('f') > -1)) { applyEl(el, r); return; }
+    if (r && !el.querySelector('img,picture,video,iframe,canvas') && (!el.children.length || r.s.indexOf('<') > -1 || r.f.indexOf('f') > -1)) { applyEl(el, r); return; }
     var kids = Array.prototype.slice.call(el.childNodes);
     for (var i = 0; i < kids.length; i++) {
       var n = kids[i];
