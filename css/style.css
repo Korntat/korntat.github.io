@@ -112,7 +112,7 @@ p { margin: 0 0 1em; }
 .kicker { display: block; color: var(--gold-dark); font-weight: 600; font-size: .9rem; letter-spacing: .06em; margin-bottom: 4px; }
 
 /* Intro */
-.intro-grid { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: center; }
+.intro-grid { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: start; }
 .photo-placeholder { aspect-ratio: 4 / 5; border-radius: var(--radius); background: repeating-linear-gradient(45deg, #eef1f6, #eef1f6 12px, #e6eaf1 12px, #e6eaf1 24px); border: 2px dashed #a9b4c7; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #56627a; text-align: center; padding: 20px; }
 .photo-placeholder svg { width: 88px; height: 88px; color: #9aa6bb; }
 .photo-placeholder span { font-weight: 600; font-size: .95rem; }
@@ -413,7 +413,7 @@ html:not([lang="th"]) .llm-photos figcaption.photo-caption { font-size: .78rem; 
 .slider-dot { box-shadow: 0 0 0 1px rgba(15,31,58,.35), 0 1px 4px rgba(0,0,0,.45); width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 1.5px solid #fff; background: transparent; cursor: pointer; }
 .slider-dot[aria-current="true"] { background: var(--gold); border-color: var(--gold); }
 .slide:nth-child(1) img { object-position: center 55%; }
-.slide:nth-child(2) img { object-position: center 66%; }
+.slide:nth-child(2) img { object-position: center 55%; }
 .slide:nth-child(3) img { object-position: center 55%; }
 @media (max-width: 700px) {
   .slider { margin: 18px -6px; border-radius: 14px; }
